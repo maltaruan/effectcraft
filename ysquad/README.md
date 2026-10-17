@@ -12,8 +12,14 @@ After Effects da dupla Premiere + After), não paridade total com o After Effect
 
 ## Ponte com o FilmCraft
 
-Cada cena de motion sai daqui como `.mov` ProRes 4444 com alfa e entra no FilmCraft pela chave
-`motion` do `efeitos.json` (ver `~/motion-ysquad/FILMCRAFT.md`).
+Cada cena de motion sai daqui como `.mov` ProRes 4444 com alfa, no tamanho do vídeo final e já no
+lugar, e entra no FilmCraft pela chave `motion` do `efeitos.json` (ver `~/motion-ysquad/FILMCRAFT.md`).
+O FilmCraft só confere transparência e tamanho e põe a 100 %: não encaixa nem move.
+
+- `receitas/legenda_viva.py PASTA_DO_CORTE SAIDA.mov [--estilo caixa|acende|pop|acumula|limpa]`: a
+  legenda animada do corte (HyperFrames, ProRes 4444 com alfa), veio da receita do FilmCraft em
+  17/10. Lê o `.fcpxml` e o `transcript.json` do corte; o FilmCraft recebe o `.mov` em
+  `montar_video.py --legenda-viva`. `--amostras` gera um vídeo e um quadro de cada estilo.
 
 ## Estado (17/10/2026)
 
