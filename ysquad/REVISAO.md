@@ -41,3 +41,25 @@ no nosso uso real: cena de motion por script → `.mov` com transparência → m
 - Estabilidade do app com janela (`--control 9877`): só a linha de comando foi usada.
 - Fidelidade com o After: o projeto só mediu um caso (suavização de curva); os efeitos não foram
   comparados quadro a quadro. Projeto `.aep` não abre (não importa pra nós: criamos do zero).
+
+## Segunda rodada (17/10/2026): o que depende da filmagem
+
+Teste em 3 s do vídeo do Ruan (1080×1920, 25 fps, `sony4k_60s`).
+
+| Caso | Resultado |
+|---|---|
+| Rastreio (texto preso ao relógio) | ✅ 75 quadros em <1 s; o alvo precisa ficar no quadro |
+| Efeito na filmagem (Gaussian Blur, Turbulent Displace) | ✅ ~0,2 s por quadro |
+| Texto atrás da pessoa (Roto Brush + MobileSAM) | ✅ pessoa inteira, rosto opaco, ~60 s pros 75 quadros; borda do cabelo dura |
+| Object Matte + MobileSAM | ⚠️ cabeça perfeita, perde parte da camiseta |
+| Vídeo do celular girado | ✅ importa em pé (2160×3840) |
+
+Armadilhas achadas (não são defeito do programa, mas não estão na documentação):
+1. Na linha de comando a escolha do modelo vale só dentro do mesmo `run` (a CLI não guarda
+   preferências: `apps/effectcraft-cli/src/main.rs:351-366`). Sem `roto.model.select` no mesmo
+   `run`, cai no método clássico calado, e um recorte congelado com MobileSAM é refeito no clássico.
+2. Vários pontos num `roto.stroke` viram uma linha contínua (`crates/track/src/roto/mod.rs:311`):
+   um traço de fundo cruzou o rosto e abriu o buraco. Use um traço por ponto.
+3. Exportar pelo `renderQueue.render` ou `comp.saveFrameAs` dentro do mesmo `run`, não pelo
+   `render-frame` solto.
+Receita que funcionou: skill `effectcraft-cena`, seção "Recorte da pessoa".
