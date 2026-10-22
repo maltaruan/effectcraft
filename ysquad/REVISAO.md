@@ -63,3 +63,26 @@ Armadilhas achadas (não são defeito do programa, mas não estão na documenta�
 3. Exportar pelo `renderQueue.render` ou `comp.saveFrameAs` dentro do mesmo `run`, não pelo
    `render-frame` solto.
 Receita que funcionou: skill `effectcraft-cena`, seção "Recorte da pessoa".
+
+## Versão oficial 0.15.0 (22/10/2026)
+
+O que mudou, pelo nosso uso:
+- **Útil:** molde por linha de comando aceita trocar uma mídia por caminho de arquivo (`--values`,
+  #1780), o que deixa o mesmo molde rodar sobre outro trecho de filmagem; `render --progress` mostra o
+  andamento quando quem chama é um programa (o Nolan); quadro de MP4 com tempo arredondado lido no
+  ritmo certo, sem quadro repetido (#1442, filmagem de celular); `setValue` recusa valor com número
+  errado de partes (antes passava calado); presets de suavização de entrada e saída nos quadros-chave
+  (#1329); `anim.applyPreset` acha efeito pelo nome interno do After (#1746); máscara que cresce além
+  da curva vira forma cheia; caminhos de forma viram curvas editáveis (#932); correções que evitam
+  travar (cor, máscara, amostragem de imagem, importação de SVG, glTF e FBX).
+- **Neutro:** expressões (`propertyGroup()`), alças de 3D na tela, seletor de texto arrastável,
+  menus em japonês, fontes variáveis, camada guia escondida em comp aninhada.
+- **Não precisamos:** robôs de verificação do repositório (SonarCloud, CodeRabbit, Dependabot),
+  Windows, Linux, versão web, exportação EXR.
+
+Testes refeitos no vídeo do Ruan (`sony4k_60s`, 3 s, 1080×1920, 25 fps): cena de motion (mola,
+barra, brilho, saída) ✅ exportação 1,2 s (antes 7 s); rastreio ✅ <1 s; Gaussian Blur ✅; texto
+atrás da pessoa com Roto Brush + MobileSAM ✅ 58 s; molde com texto e cor trocados ✅. Testes das partes que usamos (script, export, text, render, lottie, track, cli): 613 passaram, 0 falharam.
+
+Continua igual: fonte com nome errado (`Druk-Super-Trial`) ainda é aceita calada (item 1 de
+"Precisa ajustar"). As três armadilhas do recorte da pessoa continuam valendo.

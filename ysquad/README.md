@@ -19,6 +19,14 @@ O FilmCraft só confere transparência e tamanho e põe a 100 %: não encaixa ne
 
 A legenda viva (HyperFrames) mora em `~/motion-ysquad/receitas/legenda_viva.py` desde 17/10.
 
+## Estado (22/10/2026)
+
+Versão oficial 0.15.0 juntada (170 atualizações; estado anterior marcado `antes-oficial-0.15`).
+As nossas mudanças eram só desta pasta, então não houve conflito. Compila em 2,5 min. Refeitos no
+vídeo do Ruan os testes do nosso uso: cena por script com ProRes 4444 e transparência (exportação
+de 3 s caiu de 7 s para 1,2 s), rastreio, desfoque na filmagem, texto atrás da pessoa com MobileSAM
+(~60 s pra 3 s) e molde com texto e cor trocados. Tudo igual ou melhor; 613 testes das partes que usamos passaram. Detalhe em REVISAO.md.
+
 ## Estado (17/10/2026)
 
 Fork criado, clonado e compilado (9 min). Cena de teste feita por script no formato do After
